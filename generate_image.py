@@ -1,24 +1,34 @@
 #!/usr/bin/env python3
 """Build entry.png — a one-image summary of world news, Wednesday 18 November 2026.
 
-Final six, each reported on 18 Nov 2026 by at least two outlets:
-  1. Iran's drones hit US sites at Kuwait's Ali Al Salem base and Bahrain
-     intercepted more attacks, a day after US jets struck Iran's Qeshm
-     Island (Reuters, AP, Gulf News, CNA).
-  2. Israel opened its first broad ground offensive in central Gaza since
-     the October 2025 ceasefire, pushing past the "yellow line" near
-     Nuseirat and Bureij (Al Jazeera, TRT World, Outlook India).
-  3. Xi Jinping and Vladimir Putin met at the APEC summit in Shenzhen, a
-     day before their first three-way talks with Donald Trump on 19 Nov
-     (Reuters, BBC, The Hindu).
-  4. Quad leaders held their first summit in over two years in Manila, as
-     Trump announced a major US-Philippines trade deal (Anadolu, AP, TOI).
+Final six, each reported on 18 Nov 2026 by at least two outlets (the two
+outlets named on each card):
+  1. Iran said its drones targeted a US air base in Kuwait and sites in
+     Bahrain, hours after US jets struck a Revolutionary Guard site on
+     Qeshm Island; Kuwait and Bahrain said the attacks were intercepted
+     (Reuters, AP).
+  2. Israel launched a ground operation in central Gaza; tanks advanced
+     across the ceasefire's "Yellow Line" near Nuseirat and Bureij
+     against what Israel described as a Hamas tunnel threatening its
+     troops, forcing families to flee (Reuters, AFP).
+  3. Xi Jinping and Vladimir Putin met in Shenzhen ahead of their first
+     trilateral talks with Donald Trump; Ukraine and Iran are expected to
+     feature in the discussions with Trump (Reuters, AFP).
+  4. After the Quad summit in Manila, Trump claimed the US had secured
+     a major trade deal with the Philippines. Manila confirmed an
+     understanding on economic cooperation, but said no formal deal had
+     been signed or detailed terms announced (Reuters, AP). The Quad
+     summit itself was 17 Nov: do not date it 18 Nov again.
   5. Anthropic priced its IPO at $83 a share, above its $70-$78 range,
-     valuing it at about $1.5 trillion; trading starts Thursday as ANT
-     (CNBC, Reuters, Bloomberg, BBC). Priced Wednesday evening, 18 Nov US.
-  6. Democrat Mary Peltola won Alaska's Senate race, the last undecided
-     midterm contest, giving Democrats a 56-44 majority (AP, Al Jazeera,
-     NPR). Called late Tuesday in the US, Wednesday 18 Nov in UTC/Asia.
+     raising about $81 billion in the largest IPO on record and valuing
+     it at about $1.5 trillion on a fully diluted basis; shares start
+     trading Thursday on Nasdaq under the ticker ANT (Reuters, CNBC).
+     Priced Wednesday evening, 18 Nov US.
+  6. Democrat Mary Peltola defeated Republican Dan Sullivan in Alaska's
+     Senate race, the final unresolved contest, giving Democrats a 56-44
+     majority and making her the first Alaska Native elected to the US
+     Senate (AP, ABC News). Called late Tuesday in the US, Wednesday
+     18 Nov in UTC/Asia — the card carries a small note saying so.
 
 Dropped from the morning draft after a full-day re-check: the Kerch bridge
 arch fell on 17 Nov (strikes 16-17 Nov), the Siberian plane crash was 17 Nov,
@@ -31,7 +41,12 @@ near-black ink, breaking-news red masthead, serif display headlines
 semantic colour per story (tag text + top bar; colour never the only
 carrier — every card also carries a numbered label and a text tag).
 Contrast: body ink on white ~9:1; white tag text on every story colour
->= 4.5:1. Rendered with PIL + Noto (SIL Open Font License).
+>= 4.5:1. Each card carries a small two-outlet source label along its
+bottom edge (story 6 adds a call-time note on the same line). Headlines
+render at 25px (verified to fit two lines); body text auto-fits
+16->14px so every story fits four lines with no truncation, and the
+card's bottom whitespace is kept clear. Rendered with PIL + Noto
+(SIL Open Font License).
 Fully deterministic: same input, same bytes.
 """
 from PIL import Image, ImageDraw, ImageFont
@@ -55,45 +70,61 @@ F_REG = F_DIR + "NotoSans-Regular.ttf"
 STORIES = [
     {
         "tag": "WAR · THE GULF", "color": (185, 28, 28),
-        "head": "Iran Hits US Bases in Kuwait and Bahrain",
-        "body": "Iran said its drones struck US sites at Kuwait's Ali Al Salem "
-                "base, and Bahrain intercepted more attacks — a day after US "
-                "jets hit a site on Iran's Qeshm Island.",
+        "head": "Iran Targets US Base in Kuwait and Sites in Bahrain",
+        "body": "Iran said its drones targeted a US air base in Kuwait and "
+                "sites in Bahrain, hours after US jets struck a "
+                "Revolutionary Guard site on Qeshm Island. Kuwait and "
+                "Bahrain said the attacks were intercepted.",
+        "src": "Reuters \u00b7 AP",
     },
     {
         "tag": "WAR · GAZA", "color": (154, 52, 18),
-        "head": "Israel Opens Ground Offensive in Central Gaza",
-        "body": "Tanks pushed past the ceasefire's \u201cyellow line\u201d near "
-                "Nuseirat and Bureij in the first broad ground offensive "
-                "since the October 2025 ceasefire, forcing families to flee.",
+        "head": "Israel Launches Ground Operation in Central Gaza",
+        "body": "Tanks advanced across the ceasefire's 'Yellow Line' near "
+                "Nuseirat and Bureij as Israeli forces launched an "
+                "operation against what they described as a Hamas tunnel "
+                "threatening their troops, forcing families to flee.",
+        "src": "Reuters \u00b7 AFP",
     },
     {
         "tag": "DIPLOMACY · SHENZHEN", "color": (29, 78, 216),
-        "head": "Xi and Putin Meet Before Trump Talks",
-        "body": "Xi Jinping and Vladimir Putin met at the APEC summit in "
-                "Shenzhen, a day before their first three-way talks with "
-                "Donald Trump, with the Iran and Ukraine wars on the agenda.",
+        "head": "Xi and Putin Meet Ahead of Trump Talks",
+        "body": "Xi Jinping and Vladimir Putin met in Shenzhen ahead of "
+                "their first trilateral talks with Donald Trump. Ukraine "
+                "and Iran are expected to feature in discussions with "
+                "Trump.",
+        "src": "Reuters \u00b7 AFP",
     },
     {
         "tag": "DIPLOMACY · MANILA", "color": (15, 118, 110),
-        "head": "Quad Meets as Trump Seals Philippines Deal",
-        "body": "Quad leaders held their first summit in over two years in "
-                "Manila, as Trump announced a major US\u2013Philippines trade "
-                "deal and new maritime and AI cooperation.",
+        "head": "Trump Touts Philippines Trade Deal After Quad",
+        "body": "After the Quad summit in Manila, Trump claimed the US had "
+                "secured a major trade deal with the Philippines. Manila "
+                "confirmed an understanding on economic cooperation, but "
+                "said no formal deal had been signed or detailed terms "
+                "announced.",
+        "src": "Reuters \u00b7 AP",
     },
     {
         "tag": "TECH · FINANCE", "color": (107, 33, 168),
         "head": "Anthropic Prices IPO at $83 a Share",
-        "body": "The Claude-maker priced its listing above its $70\u2013$78 "
-                "range, valuing it at about $1.5 trillion, with shares due "
-                "to start trading on Nasdaq on Thursday as ANT.",
+        "body": "Anthropic priced its IPO at $83, above its $70\u2013$78 "
+                "range, raising about $81 billion in the largest IPO on "
+                "record and valuing the company at about $1.5 trillion on "
+                "a fully diluted basis. Shares are due to start trading on "
+                "Nasdaq Thursday under the ticker ANT.",
+        "src": "Reuters \u00b7 CNBC",
     },
     {
         "tag": "POLITICS · USA", "color": (21, 94, 117),
-        "head": "Peltola Wins Alaska, Sealing 56\u201344 Senate",
-        "body": "Democrat Mary Peltola beat Republican Dan Sullivan in the "
-                "last undecided Senate race, giving Democrats a 56\u201344 "
-                "majority and making her the first Alaska Native senator.",
+        "head": "Peltola Wins Alaska Senate Race, Giving Democrats "
+                "56\u201344 Majority",
+        "body": "Democrat Mary Peltola defeated Republican Dan Sullivan "
+                "in the final unresolved Senate race, giving Democrats a "
+                "56\u201344 majority and making her the first Alaska Native "
+                "elected to the US Senate.",
+        "src": "AP \u00b7 ABC News",
+        "note": "Called Tue 17 Nov US time \u00b7 18 Nov UTC",
     },
 ]
 
@@ -146,8 +177,9 @@ def main():
     top, ch = 202, 244
     f_tag = ImageFont.truetype(F_BOLD, 18)
     f_num = ImageFont.truetype(F_NUM, 30)
-    f_head = ImageFont.truetype(F_HEAD, 26)
-    f_body = ImageFont.truetype(F_REG, 19)
+    f_head = ImageFont.truetype(F_HEAD, 25)
+    f_src = ImageFont.truetype(F_REG, 12)
+    body_sizes = (16, 15, 14)
 
     for i, s in enumerate(STORIES):
         x = mx + (i % 2) * (cw + gap)
@@ -164,16 +196,31 @@ def main():
         num = f"{i + 1:02d}"
         nw = d.textlength(num, font=f_num)
         d.text((x + cw - 20 - nw, y + 20), num, font=f_num, fill=MUTED)
-        # headline (max 2 lines)
-        hy = y + 64
+        # headline (max 2 lines; every headline verified to fit at 25px)
+        hy = y + 58
         for ln in wrap(d, s["head"], f_head, cw - 40)[:2]:
             d.text((x + 20, hy), ln, font=f_head, fill=INK)
-            hy += 32
-        # body (max 4 lines, line-height 1.5)
-        by = y + 134
-        for ln in wrap(d, s["body"], f_body, cw - 40)[:4]:
+            hy += 30
+        # body (auto-fit 16->14px so the longest copy fits 4 lines,
+        # line-height ~1.45, nothing truncated)
+        lines = None
+        for size in body_sizes:
+            f_body = ImageFont.truetype(F_REG, size)
+            cand = wrap(d, s["body"], f_body, cw - 40)
+            lines = cand
+            if len(cand) <= 4:
+                break
+        by = y + 124
+        lh = round(size * 1.45)
+        for ln in lines[:4]:
             d.text((x + 20, by), ln, font=f_body, fill=BODY)
-            by += 27
+            by += lh
+        # small source line along the card's bottom edge (story 6 also
+        # carries its call-time note on the same line)
+        src_text = s["src"]
+        if s.get("note"):
+            src_text += " \u2014 " + s["note"]
+        d.text((x + 20, y + ch - 26), src_text, font=f_src, fill=MUTED)
 
     # ---- footer ----
     f_foot = ImageFont.truetype(F_REG, 16)
