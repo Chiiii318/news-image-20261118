@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/news-image-20261118/Chiiii318/news-image-20261118/rank.svg)](https://make.fun/bounty/news-image-20261118/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261118)
 [![reward](https://make.fun/badge/news-image-20261118/Chiiii318/news-image-20261118/reward.svg)](https://make.fun/bounty/news-image-20261118?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261118)
 
-One image that sums up the world news of Wednesday, 18 November 2026: Ukraine's strike on the Crimean Bridge, the Quad summit in Manila, Iran's drone strike on a US radar in Bahrain, the Siberian military plane crash, Nvidia's first earnings beat without Jensen Huang, and the 178-website crypto attack. Every story was cross-checked across at least two of the day's outlets (NDTV, The Japan Times, Times Now, Jagran Josh, The Sunday Guardian, Economic Times). The program writes the pre-made infographic (`entry.png`, 1024×1024) to the output directory, byte-identical on every run; `generate_image.py` is the script that produced the image.
+One image that sums up the world news of Wednesday, 18 November 2026: Iran's drone strikes on US bases in Kuwait and Bahrain, Israel's ground offensive in central Gaza, the Xi–Putin meeting in Shenzhen ahead of the Trump trilateral, the Quad summit in Manila and the US–Philippines trade deal, Anthropic's $83 IPO pricing, and Mary Peltola's Alaska Senate win. Every story was reported on 18 November 2026 by at least two outlets (Reuters, AP, BBC, Al Jazeera, Gulf News, CNBC, The Hindu). The program writes the pre-made infographic (`entry.png`, 1024×1024) to the output directory, byte-identical on every run; `generate_image.py` is the script that produced the image.
 
 ## Run it
 
